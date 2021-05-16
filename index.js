@@ -37,10 +37,20 @@ function changeColors() {
 
 function addColor() {
     const userInput = document.querySelector(".colorInput");
+
+    const colorData = userInput.value.split(":");
+
+    const colorObject = {
+        name: colorData[0],
+        motto: colorData[1],
+    }
     
-    if(colors.indexOf(userInput.value) === -1) {
-        document.querySelector("body").style.backgroundColor = userInput.value;
-        colors.push(userInput.value);
+
+    if(colors.findIndex(color => color.name === colorObject.name) === -1) {
+        document.querySelector("body").style.backgroundColor = colorObject.name;
+        document.querySelector("#colorName").textContent = colorObject.name;
+        document.querySelector("#colorDesc").textContent = colorObject.motto;
+        colors.push(colorObject);
         userInput.value = "";
         userInput.focus();
     } else {
